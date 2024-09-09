@@ -1,5 +1,5 @@
 {
-  "name": "shared-components",
+  "name": "@langapps/shared-components",
   "version": "1.0.0",
   "description": "A collection of reusable components",
   "main": "dist/index.js",
@@ -10,13 +10,15 @@
       "import": "./dist/index.esm.js",
       "require": "./dist/index.js"
     },
-    "./TextAreaWithControls": {
-      "import": "./dist/TextAreaWithControls/index.esm.js",
-      "require": "./dist/TextAreaWithControls/index.js"
-    },
     "./SubscriptionInfo": {
       "import": "./dist/SubscriptionInfo/index.esm.js",
-      "require": "./dist/SubscriptionInfo/index.js"
+      "require": "./dist/SubscriptionInfo/index.js",
+      "types": "./dist/SubscriptionInfo/index.d.ts"
+    },
+    "./TextAreaWithControls": {
+      "import": "./dist/TextAreaWithControls/index.esm.js",
+      "require": "./dist/TextAreaWithControls/index.js",
+      "types": "./dist/TextAreaWithControls/index.d.ts"
     }
   },
   "files": [

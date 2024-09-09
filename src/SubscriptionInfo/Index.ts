@@ -1,1 +1,1 @@
-export { default } from './SubscriptionInfo';
+export { default, SubscriptionInfoType } from './SubscriptionInfo';
