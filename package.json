@@ -3,10 +3,28 @@
   "version": "1.0.0",
   "description": "A collection of reusable components",
   "main": "dist/index.js",
+  "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js"
+    },
+    "./TextAreaWithControls": {
+      "import": "./dist/TextAreaWithControls/index.esm.js",
+      "require": "./dist/TextAreaWithControls/index.js"
+    },
+    "./SubscriptionInfo": {
+      "import": "./dist/SubscriptionInfo/index.esm.js",
+      "require": "./dist/SubscriptionInfo/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "react-scripts build",
-    "test": "react-scripts test"
+    "build": "rollup -c",
+    "prepare": "npm run build"
   },
   "keywords": [
     "shared",
@@ -16,6 +34,9 @@
   "author": "Your Name",
   "license": "ISC",
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^13.5.0",
@@ -29,11 +50,17 @@
     "react-dom": "^18.3.1",
     "react-i18next": "^15.0.1",
     "react-scripts": "^5.0.1",
+    "rollup": "^4.21.2",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
     "ts-jest": "^29.2.5",
     "typescript": "^5.6.2"
   },
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "i18next": "^23.15.0"
-  }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module"
 }

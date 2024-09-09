@@ -163,3 +163,5 @@ export const TextAreaWithControls = forwardRef<HTMLTextAreaElement, TextAreaWith
 );
 
 TextAreaWithControls.displayName = 'TextAreaWithControls';
+
+export default TextAreaWithControls;
