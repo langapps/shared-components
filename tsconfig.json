@@ -1,0 +1,10 @@
+{
+    "extends": "./tsconfig.base.json",
+    "include": [
+        "SubscriptionInfo/**/*",
+        "TextAreaWithControls/**/*",
+    ],
+    "compilerOptions": {
+        "types": ["node", "jest", "@testing-library/jest-dom"]
+    }
+}
