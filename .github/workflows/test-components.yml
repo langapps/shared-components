@@ -1,4 +1,4 @@
-name: Test Components
+name: Test, Build, and Publish Components
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
+  test-and-publish:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,9 +17,19 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '18'
+        registry-url: 'https://registry.npmjs.org'
 
     - name: Install dependencies
-      run: npm ci  --legacy-peer-deps
+      run: npm ci --legacy-peer-deps
 
     - name: Run tests
       run: npm test
+
+    - name: Build components
+      run: npm run build
+
+    - name: Publish to npm
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      run: npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
