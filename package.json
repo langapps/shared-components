@@ -27,7 +27,6 @@
   "scripts": {
     "build": "rollup -c",
     "test": "react-scripts test",
-    "install": "npm install --legacy-peer-deps",
     "prepare": "npm run build"
   },
   "keywords": [
