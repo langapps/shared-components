@@ -25,6 +25,11 @@ jobs:
     - name: Run tests
       run: npm test
 
+    - name: Debug file structure
+      run: |
+        pwd
+        ls -R src
+
     - name: Build components
       run: npm run build
 
