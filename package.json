@@ -26,6 +26,8 @@
   ],
   "scripts": {
     "build": "rollup -c",
+    "test": "react-scripts test",
+    "install": "npm install --legacy-peer-deps",
     "prepare": "npm run build"
   },
   "keywords": [
@@ -55,11 +57,13 @@
     "rollup": "^4.21.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "ts-jest": "^29.2.5",
+    "tslib": "^2.7.0",
     "typescript": "^5.6.2"
   },
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
-    "i18next": "^23.15.0"
+    "i18next": "^23.15.0",
+    "rollup-plugin-dts": "^6.1.1"
   },
   "publishConfig": {
     "access": "public"
