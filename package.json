@@ -5,29 +5,12 @@
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/index.esm.js",
-      "require": "./dist/index.js"
-    },
-    "./SubscriptionInfo": {
-      "import": "./dist/SubscriptionInfo/index.esm.js",
-      "require": "./dist/SubscriptionInfo/index.js",
-      "types": "./dist/SubscriptionInfo/index.d.ts"
-    },
-    "./TextAreaWithControls": {
-      "import": "./dist/TextAreaWithControls/index.esm.js",
-      "require": "./dist/TextAreaWithControls/index.js",
-      "types": "./dist/TextAreaWithControls/index.d.ts"
-    }
-  },
   "files": [
     "dist"
   ],
   "scripts": {
     "build": "rollup -c",
-    "test": "react-scripts test",
-    "prepare": "npm run build"
+    "test": "react-scripts test"
   },
   "keywords": [
     "shared",
