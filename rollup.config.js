@@ -26,18 +26,30 @@ const createConfig = (name) => ({
     commonjs(),
     typescript({ 
       tsconfig: './tsconfig.json',
-      include: [`src/${name}/**/*.ts`],
-      exclude: componentNames.filter(n => n !== name).map(n => `src/${n}/**/*`),
-    }),
-    dts({ 
-      tsconfig: './tsconfig.json',
-      include: [`src/${name}/**/*.ts`],
-      outputDir: `dist/${name}`,
-    }),
+      include: [`src/${name}/**/*.ts`, `src/${name}/**/*.tsx`],
+      exclude: [
+        ...componentNames.filter(n => n !== name).map(n => `src/${n}/**/*`),
+        '**/*.test.ts',
+        '**/*.test.tsx'
+      ],
+      declaration: true,
+      declarationDir: `dist/${name}`,
+    })
   ],
+  external: ['react', 'react-dom', 'react-i18next', 'lucide-react'],
+});
+
+const createDtsConfig = (name) => ({
+  input: `src/${name}/index.ts`,
+  output: [{ file: `dist/${name}/index.d.ts`, format: 'es' }],
+  plugins: [dts({ 
+    tsconfig: './tsconfig.json',
+    include: [`src/${name}/**/*.ts`, `src/${name}/**/*.tsx`],
+    exclude: ['**/*.test.ts', '**/*.test.tsx'],
+  })],
 });
 
 export default [
-  // Individual component bundles
   ...componentNames.map(createConfig),
+  ...componentNames.map(createDtsConfig),
 ];
