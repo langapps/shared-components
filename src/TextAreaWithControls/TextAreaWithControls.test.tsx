@@ -1,7 +1,6 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import { TextAreaWithControls } from './TextAreaWithControls';
-import { Copy } from 'lucide-react';
 
 describe('TextAreaWithControls', () => {
   const mockOnChange = jest.fn();
@@ -16,7 +15,7 @@ describe('TextAreaWithControls', () => {
     placeholder: 'Enter text here',
     disabled: false,
     isLoading: false,
-    loadingText: '',
+    loadingText: 'Processing...',
     copyTitle: 'Copy',
     revertTitle: 'Revert',
     translateTitle: 'Translate',
@@ -61,7 +60,7 @@ describe('TextAreaWithControls', () => {
 
   it('disables revert button when previousValue is not defined', () => {
     render(<TextAreaWithControls {...defaultProps} value="Some text" previousValue={null} />);
-    expect(screen.queryByTitle('Revert')).toBeDisabled();
+    expect(screen.getByTitle('Revert')).toBeDisabled();
   });
 
   it('disables revert button when previousValue equals current value', () => {
@@ -130,14 +129,12 @@ describe('TextAreaWithControls', () => {
       render(<TextAreaWithControls {...defaultProps} previousValue="Previous text" value="Test text" />);
       const copyButton = screen.getByTitle('Copy');
 
-      // Check if the Copy icon is present
       expect(copyButton.querySelector('svg')).toBeInTheDocument();
 
       await act(async () => {
         fireEvent.click(copyButton);
       });
 
-      // Check if the Copy icon has the success class
       expect(copyButton.querySelector('svg')).toHaveClass('text-green-500');
     });
 
@@ -149,14 +146,12 @@ describe('TextAreaWithControls', () => {
         fireEvent.click(copyButton);
       });
 
-      // Check if the Copy icon has the success class
       expect(copyButton.querySelector('svg')).toHaveClass('text-green-500');
 
       await act(async () => {
         jest.advanceTimersByTime(500);
       });
 
-      // Check if the Copy icon no longer has the success class
       expect(copyButton.querySelector('svg')).not.toHaveClass('text-green-500');
     });
   });

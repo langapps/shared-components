@@ -15,23 +15,23 @@ export interface TextAreaWithControlsProps extends React.TextareaHTMLAttributes<
 /**
  * TextAreaWithControls Component
  * 
- * A specialized textarea component designed for grammar correction applications.
+ * A specialized textarea component designed for text processing applications.
  * It provides a rich user interface with additional control buttons for copy, revert, and translate functionalities.
  * 
  * User Perspective:
- * - Users can input their text for grammar correction in this component.
+ * - Users can input their text for processing in this component.
  * - The textarea automatically resizes based on content, providing a seamless writing experience.
  * - Users can copy their text, revert changes, and initiate translation directly from this component.
- * - The component visually indicates when it's processing a request (correcting, improving, or translating).
- * - It respects character limits based on the user's subscription status.
+ * - The component visually indicates when it's processing a request.
  * 
  * Usage:
  * - The parent component should manage the text state and pass it via the `value` prop.
- * - The parent component is responsible for handling text processing operations (correction, improvement, translation).
- * - When a text operation is in progress, set `isLoading` to true and provide appropriate `loadingText` (e.g., "Correcting...", "Improving...", "Translating...").
+ * - The parent component is responsible for handling text processing operations.
+ * - When a text operation is in progress, set `isLoading` to true and provide appropriate `loadingText`.
  * - Implement and pass the `onTranslate` function to handle translation requests.
  * - Manage the `previousValue` state in the parent component to enable the revert functionality.
  * - Implement and pass the `onRevert` function to handle reverting to the previous text state.
+ * - Provide custom text for button titles and loading state through props.
  * 
  * Example:
  * <TextAreaWithControls
@@ -39,7 +39,10 @@ export interface TextAreaWithControlsProps extends React.TextareaHTMLAttributes<
  *   onChange={handleTextChange}
  *   onTranslate={handleTranslate}
  *   isLoading={isProcessing}
- *   loadingText={isTranslating ? "Translating..." : "Correcting..."}
+ *   loadingText="Processing..."
+ *   copyTitle="Copy text"
+ *   revertTitle="Undo changes"
+ *   translateTitle="Translate text"
  *   previousValue={previousText}
  *   onRevert={handleRevert}
  * />
@@ -47,8 +50,8 @@ export interface TextAreaWithControlsProps extends React.TextareaHTMLAttributes<
  * @component
  * @param {Object} props - The component props
  * @param {() => void} props.onTranslate - Function to be called when the translate button is clicked
- * @param {boolean} props.isLoading - Indicates if the component is in a loading state (e.g., during correction or translation)
- * @param {string} [props.loadingText] - Text to display when the component is loading (e.g., "Correcting...", "Translating...")
+ * @param {boolean} props.isLoading - Indicates if the component is in a loading state
+ * @param {string} [props.loadingText="Processing..."] - Text to display when the component is loading
  * @param {string} [props.copyTitle="Copy"] - Title for the copy button
  * @param {string} [props.revertTitle="Revert"] - Title for the revert button
  * @param {string} [props.translateTitle="Translate"] - Title for the translate button
@@ -62,7 +65,7 @@ export const TextAreaWithControls = forwardRef<HTMLTextAreaElement, TextAreaWith
   ({ 
     onTranslate, 
     isLoading, 
-    loadingText,
+    loadingText = "Processing...",
     copyTitle = "Copy",
     revertTitle = "Revert",
     translateTitle = "Translate",

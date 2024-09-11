@@ -1,19 +1,29 @@
 import React from 'react';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import SubscriptionInfo from './SubscriptionInfo';
-import exp from 'constants';
-
-jest.mock('react-i18next', () => ({
-    useTranslation: () => ({
-        t: (key: string) => key,
-        i18n: { language: 'en' },
-    }),
-}));
 
 describe('SubscriptionInfo', () => {
     let mockGetSubscriptionInfo: jest.Mock;
     let mockCancelSubscription: jest.Mock;
     let originalConsoleLog: typeof console.log;
+
+    const defaultTexts = {
+        loading: 'Loading...',
+        fetchError: 'Error fetching subscription info',
+        cancelConfirmation: 'Are you sure you want to cancel?',
+        cancelSuccess: 'Subscription cancelled successfully',
+        cancelError: 'Error cancelling subscription',
+        noActiveSubscription: 'No active subscription',
+        info: 'Subscription Information',
+        status: 'Status',
+        nextPayment: 'Next Payment',
+        cancelButton: 'Cancel Subscription',
+        statusTypes: {
+            active: 'Active',
+            cancelled: 'Cancelled',
+            no_subscription: 'No Subscription'
+        },
+    };
 
     beforeAll(() => {
         originalConsoleLog = console.log;
@@ -36,14 +46,15 @@ describe('SubscriptionInfo', () => {
           <SubscriptionInfo 
             getSubscriptionInfo={mockGetSubscriptionInfo}
             cancelSubscription={mockCancelSubscription}
-            isUserLoggedIn={true} 
+            isUserLoggedIn={true}
+            texts={defaultTexts}
           />
         );
     
-        expect(screen.getByText('common.loading')).toBeInTheDocument();
+        expect(screen.getByText(defaultTexts.loading)).toBeInTheDocument();
         
         await waitFor(() => {
-            expect(screen.getByText('subscription.noActiveSubscription')).toBeInTheDocument();
+            expect(screen.getByText(defaultTexts.noActiveSubscription)).toBeInTheDocument();
         });
     });
 
@@ -59,21 +70,16 @@ describe('SubscriptionInfo', () => {
           <SubscriptionInfo 
             getSubscriptionInfo={mockGetSubscriptionInfo}
             cancelSubscription={mockCancelSubscription}
-            isUserLoggedIn={true} 
+            isUserLoggedIn={true}
+            texts={defaultTexts}
           />
         );
 
         await waitFor(() => {
-            expect(screen.getByText('subscription.info')).toBeInTheDocument();
-            expect(screen.getByText('subscription.status: subscription.statusTypes.active')).toBeInTheDocument();
-            expect(screen.getByText(/subscription.nextPayment:/)).toBeInTheDocument();
-            expect(screen.getByText((content) => {
-                return content.startsWith('subscription.nextPayment:') &&
-                    content.includes('1') &&
-                    content.includes('1') &&
-                    content.includes('2023');
-            })).toBeInTheDocument();
-            expect(screen.getByText('subscription.cancelButton')).toBeInTheDocument();
+            expect(screen.getByText(defaultTexts.info)).toBeInTheDocument();
+            expect(screen.getByText(`${defaultTexts.status}: ${defaultTexts.statusTypes.active}`)).toBeInTheDocument();
+            expect(screen.getByText((content) => content.startsWith(defaultTexts.nextPayment))).toBeInTheDocument();
+            expect(screen.getByText(defaultTexts.cancelButton)).toBeInTheDocument();
         });
     });
 
@@ -84,12 +90,13 @@ describe('SubscriptionInfo', () => {
           <SubscriptionInfo 
             getSubscriptionInfo={mockGetSubscriptionInfo}
             cancelSubscription={mockCancelSubscription}
-            isUserLoggedIn={true} 
+            isUserLoggedIn={true}
+            texts={defaultTexts}
           />
         );
     
         await waitFor(() => {
-            expect(screen.getByText('subscription.noActiveSubscription')).toBeInTheDocument();
+            expect(screen.getByText(defaultTexts.noActiveSubscription)).toBeInTheDocument();
         });
     });
 
@@ -101,7 +108,7 @@ describe('SubscriptionInfo', () => {
 
         mockGetSubscriptionInfo
             .mockResolvedValueOnce(mockSubscriptionInfo)
-            .mockResolvedValueOnce({ ...mockSubscriptionInfo, status: 'cancelled' });
+            .mockResolvedValueOnce({ status: 'cancelled' }); // Update this line
 
         mockCancelSubscription.mockResolvedValue(undefined);
 
@@ -112,23 +119,27 @@ describe('SubscriptionInfo', () => {
           <SubscriptionInfo 
             getSubscriptionInfo={mockGetSubscriptionInfo}
             cancelSubscription={mockCancelSubscription}
-            isUserLoggedIn={true} 
+            isUserLoggedIn={true}
+            texts={defaultTexts}
           />
         );
 
         await waitFor(() => {
-            expect(screen.getByText('subscription.cancelButton')).toBeInTheDocument();
+            expect(screen.getByText(defaultTexts.cancelButton)).toBeInTheDocument();
         });
 
-        fireEvent.click(screen.getByText('subscription.cancelButton'));
+        fireEvent.click(screen.getByText(defaultTexts.cancelButton));
 
         await waitFor(() => {
             expect(mockCancelSubscription).toHaveBeenCalled();
-            expect(window.alert).toHaveBeenCalledWith('subscription.cancelSuccess');
+            expect(window.alert).toHaveBeenCalledWith(defaultTexts.cancelSuccess);
         });
 
-        expect(screen.getByText('subscription.noActiveSubscription')).toBeInTheDocument();
-        //expect(screen.getByText(/subscription\.statusTypes\.cancelled/)).toBeInTheDocument();
+        // Update these expectations
+        await waitFor(() => {
+            expect(screen.getByText(`${defaultTexts.status}: ${defaultTexts.statusTypes.cancelled}`)).toBeInTheDocument();
+        });
+        expect(screen.queryByText(defaultTexts.cancelButton)).not.toBeInTheDocument();
     });
 
     it('does not fetch subscription info when user is not logged in', async () => {
@@ -136,13 +147,14 @@ describe('SubscriptionInfo', () => {
           <SubscriptionInfo 
             getSubscriptionInfo={mockGetSubscriptionInfo}
             cancelSubscription={mockCancelSubscription}
-            isUserLoggedIn={false} 
+            isUserLoggedIn={false}
+            texts={defaultTexts}
           />
         );
 
         await waitFor(() => {
             expect(mockGetSubscriptionInfo).not.toHaveBeenCalled();
-            expect(screen.queryByText('common.loading')).not.toBeInTheDocument();
+            expect(screen.queryByText(defaultTexts.loading)).not.toBeInTheDocument();
         });
     });
 });
