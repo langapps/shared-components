@@ -50,6 +50,36 @@ const createDtsConfig = (name) => ({
 });
 
 export default [
+  // Main bundle
+  {
+    input: 'src/index.ts',
+    output: [
+      {
+        file: 'dist/index.js',
+        format: 'cjs',
+        sourcemap: true,
+      },
+      {
+        file: 'dist/index.esm.js',
+        format: 'esm',
+        sourcemap: true,
+      },
+    ],
+    plugins: [
+      peerDepsExternal(),
+      resolve(),
+      commonjs(),
+      typescript({ 
+        tsconfig: './tsconfig.json',
+        exclude: ['**/*.test.ts', '**/*.test.tsx', './src/setupTests.ts'],
+      }
+      ,dts({ 
+        tsconfig: './tsconfig.json',
+        exclude: ['**/*.test.ts', '**/*.test.tsx'],
+      })
+    ),
+    ],
+  },
   ...componentNames.map(createConfig),
   ...componentNames.map(createDtsConfig),
 ];

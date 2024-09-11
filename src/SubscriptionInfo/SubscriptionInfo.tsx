@@ -6,7 +6,7 @@ export interface SubscriptionInfoType {
   nextPaymentDate?: { seconds: number };
 }
 
-interface SubscriptionInfoProps {
+export interface SubscriptionInfoProps {
   getSubscriptionInfo: () => Promise<SubscriptionInfoType>;
   cancelSubscription: () => Promise<void>;
   isUserLoggedIn: boolean;
