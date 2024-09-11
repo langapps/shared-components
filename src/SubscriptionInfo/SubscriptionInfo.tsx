@@ -45,7 +45,7 @@ export interface SubscriptionInfoProps {
  * 
  * @returns {React.ReactElement} The rendered SubscriptionInfo component
  */
-const SubscriptionInfo: React.FC<SubscriptionInfoProps> = ({ 
+export const SubscriptionInfo: React.FC<SubscriptionInfoProps> = ({ 
   getSubscriptionInfo, 
   cancelSubscription, 
   isUserLoggedIn 

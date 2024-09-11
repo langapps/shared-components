@@ -58,7 +58,7 @@ export interface TextAreaWithControlsProps extends React.TextareaHTMLAttributes<
  * 
  * @returns {React.ReactElement} The rendered TextAreaWithControls component
  */
-const TextAreaWithControls = forwardRef<HTMLTextAreaElement, TextAreaWithControlsProps>(
+export const TextAreaWithControls = forwardRef<HTMLTextAreaElement, TextAreaWithControlsProps>(
   ({ 
     onTranslate, 
     isLoading, 
