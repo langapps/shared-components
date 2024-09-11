@@ -1,2 +1,4 @@
 export { default as TextAreaWithControls } from './TextAreaWithControls';
-export { default as SubscriptionInfo, SubscriptionInfoType } from './SubscriptionInfo';
+export type { TextAreaWithControlsProps } from './TextAreaWithControls';
+export { default as SubscriptionInfo } from './SubscriptionInfo';
+export type { SubscriptionInfoType } from './SubscriptionInfo';

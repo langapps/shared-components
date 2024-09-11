@@ -1,6 +1,6 @@
 {
   "name": "@langapps/shared-components",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A collection of reusable components",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -50,5 +50,21 @@
   "publishConfig": {
     "access": "public"
   },
-  "type": "module"
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./TextAreaWithControls": {
+      "import": "./dist/TextAreaWithControls/index.esm.js",
+      "require": "./dist/TextAreaWithControls/index.js",
+      "types": "./dist/TextAreaWithControls/index.d.ts"
+    }
+  },
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0"
+  }
 }

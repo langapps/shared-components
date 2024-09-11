@@ -8,7 +8,7 @@
         "declarationDir": "dist",
         "outDir": "dist",
         "types": ["node", "jest", "@testing-library/jest-dom"],
-        "jsx": "react",
+        "jsx": "react-jsx",
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true
     }

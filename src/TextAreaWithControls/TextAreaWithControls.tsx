@@ -1,7 +1,7 @@
 import React, { forwardRef, useImperativeHandle, useRef, useState, useEffect } from 'react';
 import { Copy, Undo2, Languages } from 'lucide-react';
 
-interface TextAreaWithControlsProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+export interface TextAreaWithControlsProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
     onTranslate: () => void;
     isLoading: boolean;
     loadingText?: string;
@@ -10,7 +10,7 @@ interface TextAreaWithControlsProps extends React.TextareaHTMLAttributes<HTMLTex
     translateTitle?: string;
     previousValue: string | null;
     onRevert: () => void;
-  }  
+}
 
 /**
  * TextAreaWithControls Component
@@ -58,7 +58,7 @@ interface TextAreaWithControlsProps extends React.TextareaHTMLAttributes<HTMLTex
  * 
  * @returns {React.ReactElement} The rendered TextAreaWithControls component
  */
-export const TextAreaWithControls = forwardRef<HTMLTextAreaElement, TextAreaWithControlsProps>(
+const TextAreaWithControls = forwardRef<HTMLTextAreaElement, TextAreaWithControlsProps>(
   ({ 
     onTranslate, 
     isLoading, 
