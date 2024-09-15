@@ -1,6 +1,6 @@
 {
   "name": "@langapps/shared-components",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A collection of reusable components",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -70,6 +70,21 @@
       "types": "./dist/SubscriptionInfo/index.d.ts"
     },
     "./GrammarChecker": {
+      "import": "./dist/GrammarChecker/index.esm.js",
+      "require": "./dist/GrammarChecker/index.js",
+      "types": "./dist/GrammarChecker/index.d.ts"
+    },
+    "./dist/TextAreaWithControls": {
+      "import": "./dist/TextAreaWithControls/index.esm.js",
+      "require": "./dist/TextAreaWithControls/index.js",
+      "types": "./dist/TextAreaWithControls/index.d.ts"
+    },
+    "./dist/SubscriptionInfo": {
+      "import": "./dist/SubscriptionInfo/index.esm.js",
+      "require": "./dist/SubscriptionInfo/index.js",
+      "types": "./dist/SubscriptionInfo/index.d.ts"
+    },
+    "./dist/GrammarChecker": {
       "import": "./dist/GrammarChecker/index.esm.js",
       "require": "./dist/GrammarChecker/index.js",
       "types": "./dist/GrammarChecker/index.d.ts"

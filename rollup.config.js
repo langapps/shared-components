@@ -4,7 +4,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 
-const componentNames = ['TextAreaWithControls', 'SubscriptionInfo'];
+const componentNames = ['TextAreaWithControls', 'SubscriptionInfo', 'GrammarChecker'];
 
 const createConfig = (name) => ({
   input: `src/${name}/index.ts`,
@@ -21,20 +21,20 @@ const createConfig = (name) => ({
     },
   ],
   plugins: [
-    peerDepsExternal(),
-    resolve(),
-    commonjs(),
-    typescript({ 
+    typescript({
       tsconfig: './tsconfig.json',
-      include: [`src/${name}/**/*.ts`, `src/${name}/**/*.tsx`],
+      declaration: true,
+      declarationDir: `./dist/${name}`,
+      outDir: `./dist/${name}`,
+      rootDir: 'src',
       exclude: [
-        ...componentNames.filter(n => n !== name).map(n => `src/${n}/**/*`),
         '**/*.test.ts',
         '**/*.test.tsx'
       ],
-      declaration: true,
-      declarationDir: `dist/${name}`,
-    })
+    }),
+    peerDepsExternal(),
+    resolve(),
+    commonjs()
   ],
   external: ['react', 'react-dom', 'react-i18next', 'lucide-react'],
 });
@@ -42,11 +42,7 @@ const createConfig = (name) => ({
 const createDtsConfig = (name) => ({
   input: `src/${name}/index.ts`,
   output: [{ file: `dist/${name}/index.d.ts`, format: 'es' }],
-  plugins: [dts({ 
-    tsconfig: './tsconfig.json',
-    include: [`src/${name}/**/*.ts`, `src/${name}/**/*.tsx`],
-    exclude: ['**/*.test.ts', '**/*.test.tsx'],
-  })],
+  plugins: [dts()],
 });
 
 export default [
