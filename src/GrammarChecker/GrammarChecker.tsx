@@ -169,18 +169,18 @@ export const GrammarChecker: React.FC<GrammarCheckerProps> = ({
       <div className="flex justify-between items-center mb-4">
         <div className="space-x-2">
           <button
-            className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 font-body disabled:opacity-50"
-            onClick={() => handleCorrection('correct')}
-            disabled={isLoading || text.length === 0}
-          >
-            {t('Править')}
-          </button>
-          <button
-            className="px-4 py-2 bg-secondary text-secondary-foreground rounded-md hover:bg-secondary/90 font-body disabled:opacity-50"
+            className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 font-body disabled:opacity-50"            
             onClick={() => handleCorrection('improve')}
             disabled={isLoading || text.length === 0}
           >
             {t('Улучшить')}
+          </button>
+          <button
+            className="px-4 py-2 bg-secondary text-secondary-foreground rounded-md hover:bg-secondary/90 font-body disabled:opacity-50"
+            onClick={() => handleCorrection('correct')}
+            disabled={isLoading || text.length === 0}
+          >
+            {t('Править')}
           </button>
         </div>
         {charCount > 0 && (

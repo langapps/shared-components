@@ -1,0 +1,22 @@
+{
+  "Править": "Correct",
+  "Улучшить": "Improve",
+  "Исправление ошибок": "Correction of grammar",
+  "Исправление ошибок текста для грамотного письма на любом языке.": "Correction of grammar mistakes for a professional look in any language.",
+  "Введите ваш текст здесь...": "Enter your text here...",
+  "grammarChecker": {
+    "limitReached": "You've reached the character limit for anonymous users. Please sign in to continue with longer texts.",
+    "correcting": "Correcting...",
+    "improving": "Improving...",
+    "copy": "Copy",
+    "revert": "Revert",
+    "premiumAccess": "You have premium access until {{date}}",
+    "premiumFeatures": "Enjoy unlimited corrections and up to {{limit}} characters!",
+    "freeAccount": "Free account: {{remaining}} corrections left today for texts over {{limit}} characters.",
+    "upgradeToPremium": "Upgrade to premium for unlimited corrections of up to {{limit}} characters!",
+    "dailyLimitReached": "The correction limit for texts over than {{limit}} characters has been reached for today.",
+    "translation": "Translation",
+    "translationError": "Error occurred during translation. Please try again.",
+    "translate": "Translate"
+  }
+}
